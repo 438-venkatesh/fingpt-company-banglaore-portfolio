@@ -1,0 +1,242 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Futuristic Financial Prediction</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .main-container {
+      width: 80%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .scenario-section {
+      flex: 0 0 calc(50% - 20px);
+      padding: 10px;
+      margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      animation: fadeIn 1s ease-in-out;
+margin-right: 10px;
+    }
+
+    .try-now-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 14px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    input[type="number"] {
+      width: 50%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #888;
+      background-color: #444;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .chart-container {
+      min-height: 200px;
+      background-color: #333;
+      border-radius: 10px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+      .scenario-section {
+        flex: 0 0 100%;
+        margin-bottom: 10px;
+      }
+    }
+  .try-now-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 14px;
+      animation: pulse 2s infinite; /* Added animation */
+    }
+@keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="try-now-button">Try Now</button>
+
+  <div class="main-container">
+    <section class="scenario-section">
+      <h2>Stock Market</h2>
+      <label for="investmentAmount">Investment:</label>
+      <input type="number" id="investmentAmount" min="0">
+      <button id="predictStockButton">Predict</button>
+      <div class="chart-container" id="stockChartContainer"></div>
+    </section>
+
+    <section class="scenario-section">
+      <h2>Real Estate</h2>
+      <label for="propertyValue">Property Value:</label>
+      <input type="number" id="propertyValue" min="0">
+      <button id="predictRealEstateButton">Predict</button>
+      <div class="chart-container" id="realEstateChartContainer"></div>
+    </section>
+  </div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <script>
+    function renderChart(data, chartId) {
+      const ctx = document.getElementById(chartId).getContext('2d');
+      const myChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+          // Custom options for the chart
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const predictStockButton = document.getElementById('predictStockButton');
+      const predictRealEstateButton = document.getElementById('predictRealEstateButton');
+
+      predictStockButton.addEventListener('click', () => {
+        const investmentAmount = document.getElementById('investmentAmount').value;
+        // Simulated data for demonstration
+        const stockData = {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+          datasets: [{
+            label: 'Stock Price',
+            data: [50, 55, 60, 58, 63],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          }]
+        };
+        renderChart(stockData, 'stockChartContainer');
+      });
+
+      predictRealEstateButton.addEventListener('click', () => {
+        const propertyValue = document.getElementById('propertyValue').value;
+        // Simulated data for demonstration
+        const realEstateData = {
+          labels: ['2021', '2022', '2023', '2024', '2025'],
+          datasets: [{
+            label: 'Property Value',
+            data: [300000, 320000, 340000, 330000, 350000],
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          }]
+        };
+        renderChart(realEstateData, 'realEstateChartContainer');
+      });
+    });
+  </script>
+</body>
+</html>

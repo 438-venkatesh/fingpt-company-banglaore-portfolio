@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Background</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('q1.png');
+      background-size: cover;
+      filter: blur(3px);
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    input {
+      padding: 15px;
+      font-size: 18px;
+      width: 300px;
+      max-width: 80%;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      z-index: -1;
+    }
+
+    .financial-elements {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: url('q2.png');
+      background-size: cover;
+      animation: floatAnimation 20s infinite linear;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    @keyframes floatAnimation {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-50%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    /* Additional CSS for particles */
+    canvas#particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  <div class="financial-elements"></div>
+  <div class="content">
+    <input type="text" id="userInput" placeholder="Type your question...">
+    <div id="particles-js"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      particlesJS('particles-js', {
+        // Particle configuration
+      });
+
+      const userInput = document.getElementById('userInput');
+      const background = document.querySelector('.background');
+      const financialElements = document.querySelector('.financial-elements');
+
+      userInput.addEventListener('input', function (event) {
+        const inputValue = event.target.value;
+
+        const inputLength = inputValue.length;
+
+        let imageUrl = 'q1.png';
+
+        if (inputLength > 3 && inputLength <= 5) {
+          imageUrl = 'q3.jpg';
+        } else if (inputLength > 5 && inputLength <= 7) {
+          imageUrl = 'q4.jpg';
+        } else if (inputLength > 7 && inputLength <= 10) {
+          imageUrl = 'q5.png';
+        } else if (inputLength > 10) {
+          imageUrl = 'q6.png';
+        }
+
+        background.style.backgroundImage = `url(${imageUrl})`;
+
+        if (inputValue.toLowerCase().includes('finance')) {
+          financialElements.style.filter = 'blur(3px)';
+        } else {
+          financialElements.style.filter = 'none';
+        }
+
+        // Additional interactions based on user input can be added here
+      });
+
+      // Particle effects that follow the cursor
+      const particles = document.getElementById('particles-js');
+
+      particles.addEventListener('mousemove', function (event) {
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+
+        particles.style.left = mouseX + 'px';
+        particles.style.top = mouseY + 'px';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Financial Wisdom Desk</title>
+  <style>
+    /* Your CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: black;
+    }
+
+    canvas {
+      display: block;
+      margin: 20px auto; /* Adjust as needed */
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer; /* Change cursor for interactive elements */
+    }
+
+    .chat-container {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      padding-right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bubble {
+      border-radius: 8px;
+      padding: 8px 12px;
+      word-wrap: break-word;
+      max-width: 70%;
+      opacity: 0; /* Initially hide the bubbles */
+      transform: translateY(40px); /* Shift the bubbles downward */
+      transition: opacity 0.5s ease, transform 0.5s ease; /* Transition for the effect */
+    }
+
+    .user-bubble {
+      align-self: flex-end;
+      background-color: #DCF8C6;
+      color: #000;
+      margin-left: auto;
+    }
+
+    .bot-bubble {
+      align-self: flex-start;
+      background-color: #E5E5EA;
+      color: #000;
+      margin-right: auto;
+    }
+
+    .user-input {
+      display: flex;
+      margin-top: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4285f4;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="financialDesk" width="800" height="500"></canvas>
+
+  <div class="chat-container">
+    <div class="chat" id="chat"></div>
+    <div class="user-input">
+      <input type="text" id="userInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    // Placeholder functions for chat interface
+    function sendMessage() {
+      const userInput = document.getElementById('userInput');
+      const message = userInput.value.trim();
+
+      if (message !== '') {
+        displayUserMessage(message);
+        // Replace this with actual functionality to handle user message
+        setTimeout(() => displayBotMessage("This is a bot response."), 1000);
+
+        userInput.value = '';
+      }
+    }
+
+    function displayUserMessage(message) {
+      const chat = document.getElementById('chat');
+      const userBubble = document.createElement('div');
+      userBubble.classList.add('bubble', 'user-bubble');
+      userBubble.textContent = message;
+      chat.appendChild(userBubble);
+      chat.scrollTop = chat.scrollHeight;
+
+      // Delayed display for the floating effect
+      setTimeout(() => {
+        userBubble.style.opacity = 1;
+        userBubble.style.transform = 'translateY(0)';
+      }, 100);
+    }
+
+    function displayBotMessage(message) {
+      const chat = document.getElementById('chat');
+      const botBubble = document.createElement('div');
+      botBubble.classList.add('bubble', 'bot-bubble');
+      botBubble.textContent = message;
+      chat.appendChild(botBubble);
+      chat.scrollTop = chat.scrollHeight;
+
+      // Delayed display for the floating effect
+      setTimeout(() => {
+        botBubble.style.opacity = 1;
+        botBubble.style.transform = 'translateY(0)';
+      }, 100);
+    }
+  </script>
+
+  <script>
+    // Financial desk canvas JavaScript code goes here...
+    const canvas = document.getElementById('financialDesk');
+    const ctx = canvas.getContext('2d');
+
+    const deskImage = new Image();
+    deskImage.src = 'q2.jpg'; // Replace with your image URL
+    deskImage.onload = () => {
+      ctx.drawImage(deskImage, 0, 0, canvas.width, canvas.height);
+
+      // Clickable area for a financial tip (example)
+      ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+      ctx.fillRect(100, 100, 150, 100); // Example clickable area
+
+      // Add text or icon for the financial tip (example)
+      ctx.fillStyle = '#000';
+      ctx.font = '16px Arial';
+      ctx.fillText('Financial Tip', 120, 150); // Example text for the tip
+    };
+
+    canvas.addEventListener('click', (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      // Check if the click is within the area of the financial tip
+      if (x > 100 && x < 250 && y > 100 && y < 200) {
+        const tipDescription = "This is a financial tip. Click OK to proceed.";
+        alert(tipDescription);
+        // Perform an action when the financial tip area is clicked
+        // For instance, display more information or start a mini-game
+      }
+      // Add more conditionals for other interactive elements if needed
+    });
+  </script>
+</body>
+</html>
